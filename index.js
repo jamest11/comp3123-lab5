@@ -1,10 +1,10 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const router = express.Router();
 
 const PORT = 8081;
 
-console.log(process.env.port)
 /*
 - Create new html file name home.html 
 - add <h1> tag with message "Welcome to ExpressJs Tutorial"
@@ -18,7 +18,8 @@ router.get('/home', (req,res) => {
 - Return all details from user.json file to client as JSON format
 */
 router.get('/profile', (req,res) => {
-    res.send('This is profile router');
+    let user = JSON.parse(fs.readFileSync('user.json'));
+    res.send(user);
 });
 
 /*
