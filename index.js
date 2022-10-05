@@ -8,7 +8,7 @@ const PORT = 8081;
 
 /*
 - Create new html file name home.html 
-- add <h1> tag with message "Welcome to ExpressJs Tutorial"
+- add <h1> tag with message 'Welcome to ExpressJs Tutorial'
 - Return home.html page to client
 */
 router.get('/home', (req,res) => {
@@ -26,44 +26,44 @@ router.get('/profile', (req,res) => {
 /*
 - Modify /login router to accept username and password as query string parameter
 - Read data from user.json file
-- If username and  passsword is valid then send resonse as below 
+- If username and  password is valid then send response as below 
     {
         status: true,
-        message: "User Is valid"
+        message: 'User Is valid'
     }
 - If username is invalid then send response as below 
     {
         status: false,
-        message: "User Name is invalid"
+        message: 'User Name is invalid'
     }
-- If passsword is invalid then send response as below 
+- If psssword is invalid then send response as below 
     {
         status: false,
-        message: "Password is invalid"
+        message: 'Password is invalid'
     }
 */
-router.get('/login', (req,res) => {
+router.get('/login', (req, res) => {
     const user = JSON.parse(fs.readFileSync('user.json'));
     const username = user['username'];
     const password = user['password'];
     let response = null;
 
-    if(!req.query.username || req.query.username != username) {
+    if(req.query.username != username) {
         response = {
             state: false,
-            message: 'User is invalid'
+            message: 'Username is invalid'
         }
     }
-    else if(!req.query.password || req.query.password != password) {
+    else if(req.query.password != password) {
         response = {
             state: false,
-            message: "Username is invalid"
+            message: 'Password is invalid'
         }
     }
     else {
         response = {
             state: true,
-            message: "Login is valid"
+            message: 'Login is valid'
         }
     }
     res.send(response)
@@ -73,8 +73,8 @@ router.get('/login', (req,res) => {
 - Modify /logout route to accept username as parameter and display message
     in HTML format like <b>${username} successfully logout.<b>
 */
-router.get('/logout', (req,res) => {
-    res.send('This is logout router');
+router.get('/logout/:username', (req, res) => {
+    res.send(`<!DOCTYPE html><h1>${req.params.username} successfully logged out</h1>`);
 });
 
 app.use('/', router);
