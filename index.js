@@ -1,4 +1,3 @@
-const { resolveNaptr } = require('dns');
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -36,7 +35,7 @@ router.get('/profile', (req,res) => {
         status: false,
         message: 'User Name is invalid'
     }
-- If psssword is invalid then send response as below 
+- If password is invalid then send response as below 
     {
         status: false,
         message: 'Password is invalid'
